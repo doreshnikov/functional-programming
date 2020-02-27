@@ -1,3 +1,9 @@
+{- |
+Module      : Task7
+Description : Task7 functions
+
+Subexpression types.
+-}
 module Task7
   ( a
   , b
@@ -5,6 +11,7 @@ module Task7
 
 import Data.Either (lefts, rights)
 
+-- | The first expression for analysis.
 a :: Bool
 -- a = null . head $ map (uncurry id) [((++) "Dorian ", " Grey")]
 -- a = ($) (null . head) (map (uncurry id) [((++) "Dorian ", " Grey")])
@@ -72,6 +79,7 @@ a = applyNullHead mapResult
                 right :: [Char]
                 right = " Grey"
 
+-- | The second expression for analysis.
 b :: (Num x, Num y) => [(x, y)]
 -- b = (\x -> zip (lefts x) (rights x)) [Left (1 + 2), Right (2 ^ 6)]
 b = lambda list
