@@ -23,6 +23,8 @@ cabal.project.local
 # Stack
 .stack-work/
 stack.yaml.lock
+# Misc
+hw*/haddock/
 
 ### IDE/support
 # Vim
