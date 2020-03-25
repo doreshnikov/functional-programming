@@ -149,7 +149,7 @@ b = lambda list
             -- value = 2 ^ 6
             value   = powerTwo six
               where
-                powerTwo :: (Integral b, Num a) => b -> a
+                powerTwo :: Num a => Integer -> a
                 -- powerTwo = (2 ^)
                 powerTwo = power two
                   where
@@ -157,5 +157,5 @@ b = lambda list
                     power = (^)
                     two   :: Num a => a
                     two   = 2
-                six      :: Integral b => b
+                six      :: Integer
                 six      = 6
