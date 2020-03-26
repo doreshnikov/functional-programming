@@ -31,7 +31,8 @@ library
 test-suite hw1-test
   type:              exitcode-stdio-1.0
   hs-source-dirs:    test
-  other-modules:     Block1.Task1Spec, Block1.Task2Spec, Block1.Task3Spec
+  other-modules:     Block1.Task1Spec, Block1.Task2Spec, Block1.Task3Spec,
+                     Block2.Task1Prop, Block2.Task2Spec
   ghc-options:       -threaded -rtsopts -with-rtsopts=-N -Wno-unused-imports
                      -Wno-missing-home-modules
   main-is:           Main.hs

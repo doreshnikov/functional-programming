@@ -1,14 +1,12 @@
 module Block1.Task3Spec
- ( treeTestTree
+ ( V(..)
+ , treeTestTree
  ) where
 
-import Control.Exception (evaluate)
 import Data.List.NonEmpty (NonEmpty(..))
 import Numeric.Natural (Natural)
 import Test.Tasty (TestTree)
-import Test.Tasty.Hspec
-  (Spec, anyErrorCall, describe, it, shouldBe, shouldNotBe, shouldThrow,
-  testSpec)
+import Test.Tasty.Hspec (Spec, describe, it, shouldBe, shouldNotBe, testSpec)
 
 import Block1.Task3 (Tree(..), empty, find, fromList, insert, remove, size)
 

@@ -37,9 +37,9 @@ instance Foldable Tree where
 
   foldr :: (a -> b -> b) -> b -> Tree a -> b
   foldr _ eps Leaf                   = eps
-  foldr f (eps :: b) (Branch{..} :: Tree a) = (fold' right) .
+  foldr f (eps :: b) (Branch{..} :: Tree a) = (fold' left) .
                                               (fold' values) .
-                                              (fold' left) $ eps
+                                              (fold' right) $ eps
     where
       fold' :: Foldable t => t a -> b -> b
       fold' = flip (foldr f)
