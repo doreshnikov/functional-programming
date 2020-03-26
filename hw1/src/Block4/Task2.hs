@@ -7,7 +7,7 @@ Description : Functors - 'Tree'
 Primitive 'Tree' data type and it's instantiations for 'Traversable'.
 -}
 module Block4.Task2
-  ( Tree (..)
+  ( Tree(..)
   ) where
 
 -- | Data type 'Tree' represents a binary tree node.

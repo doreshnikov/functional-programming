@@ -1,8 +1,6 @@
 {-# OPTIONS_GHC -Wno-orphans #-}
 
-{-# LANGUAGE InstanceSigs #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE InstanceSigs, RecordWildCards, ScopedTypeVariables #-}
 
 {- |
 Module      : Block2.Task1
@@ -11,13 +9,13 @@ Description : Foldable instantiation for Block1.Task3.Tree
 Instantiation of 'Foldable' with a data type 'Tree' from Block1.Task3.
 -}
 module Block2.Task1
-  ( Tree (..)
+  ( Tree(..)
   ) where
 
 import Data.List.NonEmpty (NonEmpty)
-import qualified Data.List.NonEmpty (toList, map)
+import qualified Data.List.NonEmpty (map, toList)
 
-import Block1.Task3 (Tree (..))
+import Block1.Task3 (Tree(..))
 
 -- | 'Data.List.NonEmpty.toList' alias.
 toList' :: NonEmpty a -> [a]

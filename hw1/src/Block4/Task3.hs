@@ -11,15 +11,14 @@ for 'Traversable' and 'Monad'.
 -}
 module Block4.Task3
   ( -- * Types
-    NonEmpty (..)
+    NonEmpty(..)
 
     -- * Functions
   , toList
   , (<+>)
   ) where
 
-import Block3.Task2 ( NonEmpty (..)
-                    , toList)
+import Block3.Task2 (NonEmpty(..), toList)
 
 -- | Function '(<+>)' joins a 'NonEmpty' and a 'Data.List' of the same type
 -- into one 'NonEmpty'.

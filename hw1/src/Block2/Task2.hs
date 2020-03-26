@@ -9,7 +9,7 @@ module Block2.Task2
   , splitOn
   ) where
 
-import Data.List.NonEmpty (NonEmpty (..), (<|))
+import Data.List.NonEmpty (NonEmpty(..), (<|))
 
 -- | Function 'splitOn' takes a 'Char' separator and a 'String' and returns
 -- a 'NonEmpty' of it's substrings separated by given character.

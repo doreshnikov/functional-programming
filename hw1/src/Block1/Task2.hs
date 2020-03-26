@@ -7,7 +7,7 @@ Description : Algebraic data types - Nat
 Algebraic data type for Nat and an interface for it.
 -}
 module Block1.Task2
-  ( Nat (..)
+  ( Nat(..)
   ) where
 
 import Data.Function (fix)

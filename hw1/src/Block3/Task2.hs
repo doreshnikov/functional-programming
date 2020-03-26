@@ -8,10 +8,10 @@ Instantiations of 'Semigroup's and 'Monoid's with custom data types.
 -}
 module Block3.Task2
   ( -- * Types
-    Endo (..)
-  , Name (..)
-  , NonEmpty (..)
-  , ThisOrThat (..)
+    Endo(..)
+  , Name(..)
+  , NonEmpty(..)
+  , ThisOrThat(..)
 
     -- * Functions
   , toList

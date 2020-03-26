@@ -29,21 +29,18 @@ resolver: lts-15.1
 #   - auto-update
 #   - wai
 packages:
-- hw0
-- hw1
-- hw2
-- hw3
-- hw4
+  - hw0
+  - hw1
+  - hw2
+  - hw3
+  - hw4
 # Dependency packages to be pulled from upstream that are not in the resolver.
 # These entries can reference officially published versions as well as
 # forks / in-progress versions pinned to a git hash. For example:
 #
-# extra-deps:
-# - acme-missiles-0.3
-# - git: https://github.com/commercialhaskell/stack.git
-#   commit: e7b331f14bcffb8367cd58fbfc8b40ec7642100a
-#
-# extra-deps: ["haddock-api-2.23.0@sha256:2c6e61928d369e603525a0fca2a2fc4a503dc64ebadc4d497f5e5d44f09801f8,5591"]
+extra-deps:
+  - tasty-hspec-1.1.5.1
+  - hspec-hedgehog-0.0.1.1
 
 # Override default flag values for local packages and extra-deps
 # flags: {}

@@ -1,5 +1,4 @@
-{-# LANGUAGE InstanceSigs #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE InstanceSigs, LambdaCase #-}
 
 {- |
 Module      : Block1.Task1
@@ -9,7 +8,7 @@ Algebraic data type for Weekdays and primitive interface for it.
 -}
 module Block1.Task1
   ( -- * Types
-    Weekday (..)
+    Weekday(..)
 
     -- * Functions
   , afterDays

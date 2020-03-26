@@ -9,9 +9,9 @@ module Block3.Task1
   , maybeConcat
   ) where
 
-import Data.Bifunctor (bimap)  
-import Data.Either    (partitionEithers)
-import Data.Maybe     (fromMaybe)
+import Data.Bifunctor (bimap)
+import Data.Either (partitionEithers)
+import Data.Maybe (fromMaybe)
 
 -- | Function 'maybeConcat' takes a list of 'Maybe's of lists
 -- and concatenates all the lists wrapped inside.

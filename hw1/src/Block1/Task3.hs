@@ -1,5 +1,4 @@
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE InstanceSigs, RecordWildCards, ScopedTypeVariables #-}
 
 {- |
 Module      : Block1.Task3
@@ -9,7 +8,7 @@ Algebraic data type for BST and an interface for it.
 -}
 module Block1.Task3
   ( -- * Types
-    Tree (..)
+    Tree(..)
 
     -- * Functions
   , empty
@@ -20,7 +19,7 @@ module Block1.Task3
   , size
   ) where
 
-import Data.List.NonEmpty (NonEmpty (..), (<|))
+import Data.List.NonEmpty (NonEmpty(..), (<|))
 import qualified Data.List.NonEmpty (head)
 
 -- | Data type representing a binary tree node.
@@ -36,6 +35,14 @@ data Tree a
            , right  :: Tree a
            }
   deriving Show
+
+instance (Eq a) => Eq (Tree a) where
+  (==) :: Tree a -> Tree a -> Bool
+  (==) Leaf Leaf                           = True
+  (==) (Branch v1 l1 r1) (Branch v2 l2 r2) = (v1 == v2) &&
+                                             (l1 == l2) &&
+                                             (r1 == r2)
+  (==) _ _                                 = False
 
 -- | Function 'empty' checks whether 'Tree' of any type is empty or not.
 empty :: Tree any -> Bool
