@@ -7,8 +7,9 @@ Description : Algebraic data types - BST
 Algebraic data type for BST and an interface for it.
 -}
 module Interblock.Tree
-    -- * Types
-  ( Tree(..)
+  ( -- * Types
+    Tree(..)
+
     -- * Functions
   , empty
   , find
