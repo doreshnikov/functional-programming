@@ -17,20 +17,7 @@ module Block3.Task2
   , toList
   ) where
 
--- | Data type 'NonEmpty' is an alias for the type 'Data.List.NonEmpty'.
-data NonEmpty a = a :| [a]
-  deriving Show
-
--- | Function 'toList' converts 'NonEmpty' to 'Data.List'.
-toList :: NonEmpty a -> [a]
-toList (x :| xs) = x : xs
-
--- | 'NonEmpty' is an instance of 'Semigroup'.
--- Values of this type can be concatenated using '(<>)'.
-instance Semigroup (NonEmpty a) where
-  (<>) :: (NonEmpty a) -> (NonEmpty a) -> (NonEmpty a)
-  (<>) (x :| []) = (:|) x . toList
-  (<>) (x :| xs) = (:|) x . flip (foldr (:)) xs . toList
+import Interblock.NonEmpty
 
 -- | Data type 'ThisOrThat' represents /at least one of two options/.
 data ThisOrThat a b
@@ -40,6 +27,7 @@ data ThisOrThat a b
   | That b
   -- | Constructor of 'ThisOrThat' by both options.
   | Both a b
+  deriving (Show, Eq)
 
 -- | 'ThisOrThat' is an instance of 'Semigroup'.
 -- Values of this type can be concatenated using '(<>)'.
@@ -56,22 +44,28 @@ instance Semigroup (ThisOrThat a b) where
   (<>) (Both x _) (Both _ y) = Both x y
 
 -- | Type 'Name' is an alias for the type 'String'.
-newtype Name = Name { -- | Field 'name' returns a wrapped 'String'.
-                      name :: String
-                    }
+data Name
+  -- | Constructor of 'Name' used as 'mempty'.
+  = Empty
+  -- | Constructor of 'Name' that wraps a 'String' inside.
+  | Name { -- | Field 'name' returns a wrapped 'String'.
+         name :: String
+         } deriving (Show, Eq)
 
 -- | 'Name' is an instance of 'Semigroup'.
 -- Values of this type can be concatenated using '(<>)'.
 -- Values are concatenated with dot separator.
 instance Semigroup Name where
   (<>) :: Name -> Name -> Name
-  (<>) x y = Name $ (name x) ++ "." ++ (name y)
+  (<>) x Empty = x
+  (<>) Empty y = y
+  (<>) x y     = Name $ (name x) ++ "." ++ (name y)
 
 -- | 'Name' is an instance of 'Monoid'.
 -- This type has a 'mempty' value equal to 'Name' with empty 'String'.
 instance Monoid Name where
   mempty :: Name
-  mempty = Name ""
+  mempty = Empty
 
 -- | Type 'Endo' is an alias for a function with same type argument and value.
 newtype Endo a = Endo { -- | Field 'getEndo' returns a wrapped function.
