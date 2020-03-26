@@ -1,62 +1,45 @@
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE InstanceSigs #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 
 {- |
-Module      : Block1.Task1
-Description : Algebraic data types - Weekdays
+Module      : Block2.Task1
+Description : Block1.Task3.Tree - Foldable instantiation
 
-Algebraic data type for Weekdays and primitive interface for it.
+Instantiation of 'Foldable' with a data type 'Tree' from Block1.Task3.
 -}
-module Block1.Task1
-  ( -- * Types
-    Weekday (..)
-
-    -- * Functions
-  , afterDays
-  , daysToParty
-  , isWeekend
-  , nextDay
+module Block2.Task1
+  (
   ) where
 
-import Numeric.Natural (Natural)
+import Data.List.NonEmpty (NonEmpty)
+import qualified Data.List.NonEmpty (toList, map)
 
--- | Type 'Weekday' represents one of the days of the week
-data Weekday
-  = Monday    -- ^  'Weekday' representing monday
-  | Tuesday   -- ^  'Weekday' representing tuesday
-  | Wednesday -- ^  'Weekday' representing wednesday
-  | Thursday  -- ^  'Weekday' representing thursday
-  | Friday    -- ^  'Weekday' representing friday
-  | Saturday  -- ^  'Weekday' representing saturday
-  | Sunday    -- ^  'Weekday' representing sunday
-  deriving Show
+import Block1.Task3 (Tree (..))
 
--- | Function 'nextDay' takes a 'Weekday' object and returns the next day.
-nextDay :: Weekday -> Weekday
-nextDay = \case
-  Monday    -> Tuesday
-  Tuesday   -> Wednesday
-  Wednesday -> Thursday
-  Thursday  -> Friday
-  Friday    -> Saturday
-  Saturday  -> Sunday
-  Sunday    -> Monday
+-- | 'Data.List.NonEmpty.toList' alias.
+toList' :: NonEmpty a -> [a]
+toList' = Data.List.NonEmpty.toList
 
--- | Function 'afterDays' takes a 'Weekday' and a 'Natural' number
--- and returns a day that happens this number of days after a given one.
-afterDays :: Weekday -> Natural -> Weekday
-afterDays day 0 = day
-afterDays day n = nextDay $ afterDays day (n - 1)
+-- | 'Data.List.NonEmpty.map' alias.
+map' :: (a -> b) -> NonEmpty a -> NonEmpty b
+map' = Data.List.NonEmpty.map
 
--- | Function 'isWeekend' takes a 'Weekday' and returns
--- whether is's @Saturday@ or @Sunday@.
-isWeekend :: Weekday -> Bool
-isWeekend = \case
-  Saturday  -> True
-  Sunday    -> True
-  _         -> False
+-- | 'Tree' is an instance of 'Foldable'.
+-- Values of this type can be folded with 'foldMap' or 'foldr'
+-- (and all derived folds).
+instance Foldable Tree where
+  foldMap :: Monoid m => (a -> m) -> Tree a -> m
+  foldMap _ Leaf       = mempty
+  foldMap f Branch{..} = (foldMap f left) `mappend`
+                         (mconcat . toList' $ map' f values) `mappend`
+                         (foldMap f right)
 
--- | Function 'daysToParty' takes a 'Weekday' and returns
--- the number of days until the nearest @Friday@.
-daysToParty :: Weekday -> Natural
-daysToParty Friday = 0
-daysToParty day = (+ 1) $ daysToParty $ nextDay day
+  foldr :: (a -> b -> b) -> b -> Tree a -> b
+  foldr _ eps Leaf                   = eps
+  foldr f (eps :: b) (Branch{..} :: Tree a) = (fold' right) .
+                                              (fold' values) .
+                                              (fold' left) $ eps
+    where
+      fold' :: Foldable t => t a -> b -> b
+      fold' = flip (foldr f)

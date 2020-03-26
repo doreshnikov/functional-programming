@@ -20,13 +20,16 @@ module Block1.Task3
   , size
   ) where
 
+import Data.List.NonEmpty (NonEmpty(..), (<|))
+import qualified Data.List.NonEmpty (head)
+
 -- | Data type representing a binary tree node.
 data Tree a
   -- | Constructor of 'Tree' representing empty leaf node.
   = Leaf
   -- | Record constructor of 'Tree' representing inner node.
   | Branch { -- | Field storing node's data.
-             values :: [a]
+             values :: Data.List.NonEmpty.NonEmpty a
              -- | Field storing left child.
            , left   :: Tree a
              -- | Field storing right child.
@@ -54,19 +57,19 @@ find Branch{..} (x :: a)
   | otherwise  = find right x
     where
       value :: a
-      value = head values
+      value = Data.List.NonEmpty.head values
 
 -- | Function 'insert' takes a /binary search tree/ and a comparable value
 -- and returns a new tree with given value inserted into it.
 insert :: (Ord a) => Tree a -> a -> Tree a
-insert Leaf x = Branch [x] Leaf Leaf
+insert Leaf x = Branch (x :| []) Leaf Leaf
 insert Branch{..} (x :: a)
-  | x == value = Branch (x:values) left right
+  | x == value = Branch (x <| values) left right
   | x < value  = Branch values (insert left x) right
   | otherwise  = Branch values left (insert right x)
     where
       value :: a
-      value = head values
+      value = Data.List.NonEmpty.head values
 
 -- | Function 'fromList' takes a list of comparable values and creates
 -- a new /binary search tree/ with all given values.
@@ -79,26 +82,32 @@ remove :: (Ord a) => Tree a -> a -> Tree a
 remove Leaf _ = Leaf
 remove Branch{..} (x :: a)
   | x == value = if length values > 1
-                 then Branch (tail values) left right
+                 then Branch (tail' values) left right
                  else merge left right
   | x < value  = Branch values (remove left x) right
   | otherwise  = Branch values left (remove right x)
     where
+      -- | Values section.
       value :: a
-      value = head values
+      value = Data.List.NonEmpty.head values
+      tail' :: NonEmpty a -> NonEmpty a
+      tail' (_ :| x1 : xs) = x1 :| xs
+      tail' _ = error "Invalid state"
+
+      -- | Trees section.
       merge :: Tree a -> Tree a -> Tree a
       merge Leaf r              = r
       merge l Leaf              = l
       merge l (Branch v Leaf r) = Branch v l r
       merge l r                 = Branch (fst collect) l (snd collect)
         where
-          collect :: ([a], Tree a)
+          collect :: (NonEmpty a, Tree a)
           collect = extract r
             where
-              extract :: Tree a -> ([a], Tree a)
+              extract :: Tree a -> (NonEmpty a, Tree a)
               extract (Branch v Leaf r1) = (v, r1)
               extract (Branch v l1 r1)   = (fst next, Branch v (snd next) r1)
                 where
-                  next :: ([a], Tree a)
+                  next :: (NonEmpty a, Tree a)
                   next = extract l1
               extract _                  = error "Invalid state"

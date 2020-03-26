@@ -1,3 +1,4 @@
+{-# LANGUAGE InstanceSigs #-}
 {-# LANGUAGE LambdaCase #-}
 
 {- |
@@ -29,6 +30,19 @@ data Weekday
   | Saturday  -- ^  'Weekday' representing saturday
   | Sunday    -- ^  'Weekday' representing sunday
   deriving Show
+
+-- | 'Weekday' is an instance of 'Eq'.
+-- Values of this type can be checked for equality.
+instance Eq Weekday where
+  (==) :: Weekday -> Weekday -> Bool
+  (==) Monday Monday       = True
+  (==) Tuesday Tuesday     = True
+  (==) Wednesday Wednesday = True
+  (==) Thursday Thursday   = True
+  (==) Friday Friday       = True
+  (==) Saturday Saturday   = True
+  (==) Sunday Sunday       = True
+  (==) _ _                 = False
 
 -- | Function 'nextDay' takes a 'Weekday' object and returns the next day.
 nextDay :: Weekday -> Weekday
