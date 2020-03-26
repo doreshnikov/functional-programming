@@ -148,9 +148,9 @@ treeSpec = do
       big 0 _ = Leaf
       big x v = Branch (v :| []) (big (x - 1) (v - dv)) (big (x - 1) (v + dv))
         where
-          dv = 2 ^ (x - 1)
+          dv = 2 ^ (x - 2)
 
-      full    = big 3 0
+      full    = big 4 0
       fulln0  = remove full 0
       fulln1  = remove full 4
       fulln1' = remove full (-4)
