@@ -6,12 +6,11 @@ Data type 'Expr' for arithmetic expressions and calculation functions.
 -}
 module Block5.Task1
   ( -- * Types
-    Expr(..)
-  , ArithmeticError(..)
+    ArithmeticError(..)
+  , Expr(..)
 
     -- * Functions
   , eval
-  , evalBinary
   ) where
 
 import Control.Applicative (liftA2)
@@ -34,7 +33,7 @@ data Expr
 
 -- | Data type 'ArithmeticError' is used in event when
 -- expression can't be evaluated correctly.
-data ArithmeticError = ArithmeticError String deriving Show
+data ArithmeticError = ArithmeticError String deriving (Eq, Show)
 
 -- | Function 'evalBinary' evaluates an expression corresponding to safe binary
 -- operator. Output is either 'Left' 'ArithmeticError' or 'Right' @value@.
@@ -56,7 +55,7 @@ eval (Sub l r) = evalBinary (-) l r
 eval (Mul l r) = evalBinary (*) l r
 eval (Div l r) = eval r >>= \x -> if x == 0
                                   then Left $ ArithmeticError "Division by zero"
-                                  else eval l >>= return . (div x)
+                                  else eval l >>= \y -> return (y `div` x)
 eval (Pow l r) = eval r >>= \x -> if x < 0
                                   then Left $ ArithmeticError "Negative exponent"
                                   else eval l >>= return . (^ x)
