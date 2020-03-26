@@ -20,7 +20,7 @@ module Block1.Task3
   , size
   ) where
 
-import Data.List.NonEmpty (NonEmpty(..), (<|))
+import Data.List.NonEmpty (NonEmpty (..), (<|))
 import qualified Data.List.NonEmpty (head)
 
 -- | Data type representing a binary tree node.

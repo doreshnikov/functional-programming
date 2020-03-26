@@ -1,15 +1,17 @@
+{-# OPTIONS_GHC -Wno-orphans #-}
+
 {-# LANGUAGE InstanceSigs #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 
 {- |
 Module      : Block2.Task1
-Description : Block1.Task3.Tree - Foldable instantiation
+Description : Foldable instantiation for Block1.Task3.Tree
 
 Instantiation of 'Foldable' with a data type 'Tree' from Block1.Task3.
 -}
 module Block2.Task1
-  (
+  ( Tree (..)
   ) where
 
 import Data.List.NonEmpty (NonEmpty)
@@ -27,7 +29,7 @@ map' = Data.List.NonEmpty.map
 
 -- | 'Tree' is an instance of 'Foldable'.
 -- Values of this type can be folded with 'foldMap' or 'foldr'
--- (and all derived folds).
+-- and all derived folds.
 instance Foldable Tree where
   foldMap :: Monoid m => (a -> m) -> Tree a -> m
   foldMap _ Leaf       = mempty
