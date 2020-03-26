@@ -22,7 +22,7 @@ library
                      Block2.Task1, Block2.Task2,
                      Block3.Task1, Block3.Task2,
                      Block4.Task1, Block4.Task2, Block4.Task3,
-                     Block5.Task1
+                     Block5.Task1, Block5.Task2
   other-modules:     Interblock.Tree, Interblock.NonEmpty
   ghc-options:       -Wall
   build-depends:     base >= 4.9 && < 5,
@@ -43,6 +43,5 @@ test-suite hw1-test
   build-depends:     base >= 4.9 && < 5,
                      hw1,
                      hspec, hedgehog, hspec-hedgehog,
-                     tasty, tasty-hspec, tasty-hedgehog,
-                     QuickCheck
+                     tasty, tasty-hspec, tasty-hedgehog
   default-language:  Haskell2010
