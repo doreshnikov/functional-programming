@@ -134,21 +134,21 @@ treeSpec = do
     it "size (full)" $
       size full `shouldBe` 15
 
-    where
-      single :: a -> Tree a
-      single x = Branch (x :| []) Leaf Leaf
+  where
+    single :: a -> Tree a
+    single x = Branch (x :| []) Leaf Leaf
 
-      two     = single 2
-      example = Branch (2 :| [2]) (single 1) (single 3)
-      nontriv = Branch (X :| [Y]) Leaf (Branch (Z :| [Z]) Leaf Leaf)
+    two     = single 2
+    example = Branch (2 :| [2]) (single 1) (single 3)
+    nontriv = Branch (X :| [Y]) Leaf (Branch (Z :| [Z]) Leaf Leaf)
 
-      big :: Natural -> Int -> Tree Int
-      big 0 _ = Leaf
-      big x v = Branch (v :| []) (big (x - 1) (v - dv)) (big (x - 1) (v + dv))
-        where
-          dv = 2 ^ (x - 2)
+    big :: Natural -> Int -> Tree Int
+    big 0 _ = Leaf
+    big x v = Branch (v :| []) (big (x - 1) (v - dv)) (big (x - 1) (v + dv))
+      where
+        dv = 2 ^ (x - 2)
 
-      full    = big 4 0
-      fulln0  = remove full 0
-      fulln1  = remove full 4
-      fulln1' = remove full (-4)
+    full    = big 4 0
+    fulln0  = remove full 0
+    fulln1  = remove full 4
+    fulln1' = remove full (-4)

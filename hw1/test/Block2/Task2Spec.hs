@@ -16,7 +16,7 @@ splitJoinSpec :: Spec
 splitJoinSpec = do
   describe "splitOn" $ do
     it "path/to/file" $
-      splitOn '/' "path/to/file" `shouldBe` fromList ["path", "to", "file"]
+     splitOn '/' "path/to/file" `shouldBe` fromList ["path", "to", "file"]
     it "<empty>" $
       splitOn '/' "" `shouldBe` fromList [""]
     it "repeated xxxx" $

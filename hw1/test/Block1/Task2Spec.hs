@@ -85,9 +85,9 @@ natSpec = do
     it "1 div 0" $
       evaluate (one `div` zero) `shouldThrow` anyErrorCall
 
-    where
-      zero  = Z
-      one   = S zero
-      two   = S one
-      three = S two
-      four  = S three
+  where
+    zero  = Z
+    one   = S zero
+    two   = S one
+    three = S two
+    four  = S three

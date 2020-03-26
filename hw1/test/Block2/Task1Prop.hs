@@ -18,9 +18,10 @@ import Block2.Task1 (Tree(..))
 
 treeFoldableTestTree :: IO TestTree
 treeFoldableTestTree = return $
-  testGroup "Tree: toList . fromList === id" [ testProperty "with Int" propIntFold
-                                             , testProperty "with V" propVFold
-                                             ]
+  testGroup "Tree: toList . fromList === id"
+  [ testProperty "with Int" propIntFold
+  , testProperty "with V" propVFold
+  ]
 
 genIntList :: Gen [Int]
 genIntList = Gen.list (Range.linear 0 100000) Gen.enumBounded

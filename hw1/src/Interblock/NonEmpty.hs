@@ -65,4 +65,3 @@ instance Foldable NonEmpty where
 instance Traversable NonEmpty where
   traverse :: (Applicative f) => (a -> f b) -> NonEmpty a -> f (NonEmpty b)
   traverse t (x :| xs) = (:|) <$> (t x) <*> (traverse t xs)
-

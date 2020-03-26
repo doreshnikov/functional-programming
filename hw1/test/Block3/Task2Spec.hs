@@ -48,7 +48,6 @@ monoidsCheckSpec = do
 
   where
     assoc x y z    = shouldBe (x <> (y <> z)) ((x <> y) <> z)
-
     fassoc :: (Show a, Eq a) => Endo a -> Endo a -> Endo a -> a -> Expectation
     fassoc f g h x = shouldBe (getEndo (f <> (g <> h)) $ x)
                               (getEndo ((f <> g) <> h) $ x)
