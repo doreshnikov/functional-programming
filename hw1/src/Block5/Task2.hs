@@ -2,9 +2,9 @@
 
 {- |
 Module      : Block5.Task2
-Description : 'State' Monad - /simple moving average/
+Description : State Monad - /simple moving average/
 
-Implementation of /simple moving average/ with 'State' Monad.
+Implementation of /simple moving average/ with State Monad.
 -}
 module Block5.Task2
   ( moving

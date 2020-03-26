@@ -27,11 +27,12 @@ data Tree a
   -- | Constructor of 'Tree' representing empty leaf node.
   = Leaf
   -- | Record constructor of 'Tree' representing inner node.
-  | Branch -- | Field storing node's data.
-      { values :: Data.List.NonEmpty.NonEmpty a
-             -- | Field storing left child.
+  | Branch
+      { -- | Field storing node's data.
+        values :: Data.List.NonEmpty.NonEmpty a
+        -- | Field storing left child.
       , left :: Tree a
-             -- | Field storing right child.
+        -- | Field storing right child.
       , right :: Tree a
       }
   deriving (Show)
@@ -93,30 +94,28 @@ remove Branch {..} (x :: a)
       else merge left right
   | x < value = Branch values (remove left x) right
   | otherwise = Branch values left (remove right x)
-      -- | Values section.
-  where
-    value :: a
-    value = Data.List.NonEmpty.head values
-    tail' :: NonEmpty a -> NonEmpty a
-    tail' (_ :| x1:xs) = x1 :| xs
-    tail' _ = error "Invalid state"
-      -- | Trees section.
-    merge :: Tree a -> Tree a -> Tree a
-    merge Leaf r = r
-    merge l Leaf = l
-    merge l (Branch v Leaf r) = Branch v l r
-    merge l r = Branch (fst collect) l (snd collect)
-      where
-        collect :: (NonEmpty a, Tree a)
-        collect = extract r
-          where
-            extract :: Tree a -> (NonEmpty a, Tree a)
-            extract (Branch v Leaf r1) = (v, r1)
-            extract (Branch v l1 r1) = (fst next, Branch v (snd next) r1)
-              where
-                next :: (NonEmpty a, Tree a)
-                next = extract l1
-            extract _ = error "Invalid state"
+    where
+      value :: a
+      value = Data.List.NonEmpty.head values
+      tail' :: NonEmpty a -> NonEmpty a
+      tail' (_ :| x1:xs) = x1 :| xs
+      tail' _ = error "Invalid state"
+      merge :: Tree a -> Tree a -> Tree a
+      merge Leaf r = r
+      merge l Leaf = l
+      merge l (Branch v Leaf r) = Branch v l r
+      merge l r = Branch (fst collect) l (snd collect)
+        where
+          collect :: (NonEmpty a, Tree a)
+          collect = extract r
+            where
+              extract :: Tree a -> (NonEmpty a, Tree a)
+              extract (Branch v Leaf r1) = (v, r1)
+              extract (Branch v l1 r1) = (fst next, Branch v (snd next) r1)
+                where
+                  next :: (NonEmpty a, Tree a)
+                  next = extract l1
+              extract _ = error "Invalid state"
 
 -- | 'Data.List.NonEmpty.toList' alias.
 toList' :: NonEmpty a -> [a]
