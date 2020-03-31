@@ -22,7 +22,7 @@ steps:
       style: compact
       remove_redundant: true
   - trailing_whitespace: {}
-columns: 80
+columns: 100
 newline: native
 language_extensions:
   - BangPatterns
