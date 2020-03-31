@@ -2,7 +2,7 @@
 
 {- |
 Module      : Block6.Task1
-Description : Parser combinators - Copy Paste
+Description : Parser combinators - instantiations
 
 Instantiation of useful classes with data type 'Parser'.
 -}
@@ -20,10 +20,7 @@ data Parser s a = Parser { runParser :: [s] -> Maybe (a, [s]) }
 -- Values of this type can be mapped without unwrapping with 'fmap'.
 instance Functor (Parser s) where
   fmap :: (a -> b) -> Parser s a -> Parser s b
-  fmap f (Parser rp) = Parser $ (fmap $ apply f) . rp
-    where
-      apply :: (a -> b) -> (a, [s]) -> (b, [s])
-      apply fn (x, y) = (fn x, y)
+  fmap f (Parser p) = Parser (fmap (\(a, x) -> (f a, x)) . p)
 
 -- | 'Parser' with fixed type argument is an instance of 'Applicative'.
 -- Values of this type can be applied to each other re-wrapping the result
@@ -33,20 +30,19 @@ instance Applicative (Parser s) where
   pure :: a -> Parser s a
   pure x = Parser $ Just . (x, )
   (<*>) :: Parser s (a -> b) -> Parser s a -> Parser s b
-  (<*>) fp vp = Parser $ \dat -> case (runParser fp dat) of
-    Just (f, res) -> case (runParser vp res) of
-      Just (v, out) -> Just (f v, out)
-      Nothing       -> Nothing
-    Nothing         -> Nothing
+  (<*>) fp vp = Parser $ \dat -> do
+    (f, res) <- runParser fp dat
+    (v, out) <- runParser vp res
+    return (f v, out)
 
 -- | 'Parser' with fixed type argument is an instance of 'Monad'.
 -- Values of this type can be viewed as states and actions with those
 -- states can be sequentially composed.
 instance Monad (Parser s) where
   (>>=) :: Parser s a -> (a -> Parser s b) -> Parser s b
-  (>>=) p f = Parser $ \dat -> case (runParser p dat) of
-    Just (a, res) -> runParser (f a) res
-    Nothing       -> Nothing
+  (>>=) p f = Parser $ \dat -> do
+    (a, res) <- runParser p dat
+    runParser (f a) res
 
 -- | 'Parser' with fixed type argument is an instance of 'Alternative'.
 -- Values of this type can be alternated. Alternative between two 'Parser's
