@@ -23,7 +23,7 @@ library
                      Block3.Task1, Block3.Task2,
                      Block4.Task1, Block4.Task2, Block4.Task3,
                      Block5.Task1, Block5.Task2,
-                     Block6.Task1, Block6.Task2, Block6.Task3
+                     Block6.Task1, Block6.Task2, Block6.Task3, Block6.Task4
   other-modules:     Interblock.Tree, Interblock.NonEmpty
   ghc-options:       -Wall
   build-depends:     base >= 4.9 && < 5,
@@ -38,7 +38,7 @@ test-suite hw1-test
                      Block3.Task1Spec, Block3.Task2Spec,
                      Block4.Task1Spec,
                      Block5.Task1Spec,
-                     Block6.Task1Spec, Block6.Task2Spec
+                     Block6.Utils, Block6.Task1Spec, Block6.Task2Spec, Block6.Task3Spec, Block6.Task4Spec
   ghc-options:       -threaded -rtsopts -with-rtsopts=-N
                      -Wno-missing-home-modules
   main-is:           Main.hs

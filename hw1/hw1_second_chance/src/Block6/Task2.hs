@@ -16,11 +16,12 @@ module Block6.Task2
   , eof
   , maybeP
   , ok
+  , repeatP
   , satisfy
   , stream
   ) where
 
-import Control.Applicative ((<|>))
+import Control.Applicative (empty, (<|>))
 
 import Block6.Task1
 
@@ -62,3 +63,11 @@ anyP = foldr1 (<|>)
 -- on success and 'Nothing' on failure (but doesn't fail itself).
 maybeP :: Parser s a -> Parser s (Maybe a)
 maybeP p = (Just <$> p) <|> (Nothing <$ ok)
+
+-- | Combinator 'repeatP' takes a number and a parser repeats a given parser
+-- sequentially given number of times.
+repeatP :: Int -> Parser s a -> Parser s [a]
+repeatP n p
+  | n < 0     = empty
+  | n == 0    = pure []
+  | otherwise = (:) <$> p <*> (repeatP (n - 1) p)

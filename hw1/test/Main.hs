@@ -16,6 +16,7 @@ import Block5.Task1Spec (evalExprTestTree)
 import Block6.Task1Spec (parserInstancesTestTree)
 import Block6.Task2Spec (primitiveCombinatorsTestTree)
 import Block6.Task3Spec (simpleParsersTestTree)
+import Block6.Task4Spec (listListParserTestTree)
 
 main :: IO ()
 main = do
@@ -36,11 +37,12 @@ main = do
   b6t1 <- parserInstancesTestTree
   b6t2 <- primitiveCombinatorsTestTree
   b6t3 <- simpleParsersTestTree
+  b6t4 <- listListParserTestTree
 
   defaultMain $ testGroup "All" [ testGroup "Block1" [b1t1, b1t2, b1t3]
                                 , testGroup "Block2" [b2t1, b2t2]
                                 , testGroup "Block3" [b3t1, b3t2]
                                 , testGroup "Block4" [b4t1]
                                 , testGroup "Block5" [b5t1]
-                                , testGroup "Block6" [b6t1, b6t2, b6t3]
+                                , testGroup "Block6" [b6t1, b6t2, b6t3, b6t4]
                                 ]

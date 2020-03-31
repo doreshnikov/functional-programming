@@ -16,7 +16,8 @@ module Block6.Task3
 import Control.Applicative (some, (<|>))
 import Data.Char (digitToInt, isDigit)
 
-import Block6.Task2
+import Block6.Task1 (Parser(..))
+import Block6.Task2 (element, eof, maybeP, ok, satisfy)
 
 -- | Data type representing a /correct bracket sequence/ in grammar
 -- @cbs := <eps> | \'(\' cbs \')\' cbs@.
