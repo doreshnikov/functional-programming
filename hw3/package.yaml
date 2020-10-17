@@ -1,0 +1,82 @@
+name:                hw3-doreshnikov
+version:             0.1.0.0
+github:              "fp-ctd-itmo/hw3-doreshnikov"
+license:             BSD3
+author:              "Daniil Oreshnikov"
+maintainer:          "dan.io.oreshnikov@gmail.com"
+copyright:           "2019 Author name here"
+
+extra-source-files:
+  - README.md
+  - ChangeLog.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            App category here
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/Github username here/hw3-doreshnikov#readme>
+
+dependencies:
+  - base >= 4.7 && < 5
+  - deepseq
+  - parallel
+  - stm
+  - vector
+  - microlens
+  - directory
+  - mtl
+  - microlens
+  - filepath
+  - containers
+  - comonad
+  - random
+  - ansi-terminal
+
+library:
+  source-dirs: src
+  ghc-options:
+    - -Wall
+
+executables:
+  hw3-doreshnikov-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+      - -Wall
+    dependencies:
+      - hw3-doreshnikov
+
+tests:
+  hw3-doreshnikov-test:
+    main:                MainSpec.hs
+    source-dirs:         test
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+      - -Wall
+    dependencies:
+      - hw3-doreshnikov
+      - hspec
+      - tasty
+      - tasty-hspec
+
+benchmarks:
+  hw3-doreshnikov-benchmark:
+    main:                 MainCrit.hs
+    source-dirs:          bench
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N4
+      - -eventlog
+      - -Wall
+    dependencies:
+      - hw3-doreshnikov
+      - criterion

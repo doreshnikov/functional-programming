@@ -1,6 +1,6 @@
 module Main where
 
-import Lib
+import Task8.Comonavid19
 
 main :: IO ()
-main = someFunc
+main = simulateMany

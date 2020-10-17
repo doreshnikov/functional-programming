@@ -1,0 +1,57 @@
+name:                hw2-doreshnikov
+version:             0.1.0.0
+github:              "doreshnikov/hw2-doreshnikov"
+license:             BSD3
+author:              "Daniil"
+maintainer:          "dan.io.oreshnikov@gmail.com"
+copyright:           "2020 Daniil"
+
+extra-source-files:
+  - README.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/doreshnikov/hw2-doreshnikov#readme>
+
+dependencies:
+  - base >= 4.7 && < 5
+  - directory
+  - optparse-applicative
+  - mtl
+  - text
+  - containers
+  - bytestring
+  - utf8-string
+  - filepath
+  - transformers
+
+library:
+  source-dirs: src
+
+executables:
+  hw2-doreshnikov-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+    dependencies:
+      - hw2-doreshnikov
+
+tests:
+  hw2-doreshnikov-test:
+    main:                Main.hs
+    other-modules:       Spec.hs
+    source-dirs:         test
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+    dependencies:
+      - hw2-doreshnikov

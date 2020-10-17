@@ -1,32 +1,99 @@
-name:                hw2
-version:             0.1.0.0
-synopsis:            Synopsis for task 2
-description:         Task 2 for FP ITMO course
+cabal-version: 1.12
 
-homepage:            https://github.com/doreshnikov/fp-homework/tree/master/hw2#readme
-license:             MIT
-license-file:        LICENSE
-author:              Daniil
-maintainer:          dan.io.oreshnikov@gmail.com
-copyright:           2020 Daniil
+-- This file has been generated from package.yaml by hpack version 0.31.2.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 5916d452dd594ac3fee00c509c72c1172b4f6e538f256125758819db281fbf66
 
-category:            Web
-build-type:          Simple
-extra-source-files:  README.md
-cabal-version:       >=1.10
-tested-with:         GHC == 8.0.1
+name:           hw2-doreshnikov
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/doreshnikov/hw2-doreshnikov#readme>
+homepage:       https://github.com/doreshnikov/hw2-doreshnikov#readme
+bug-reports:    https://github.com/doreshnikov/hw2-doreshnikov/issues
+author:         Daniil
+maintainer:     dan.io.oreshnikov@gmail.com
+copyright:      2020 Daniil
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+
+source-repository head
+  type: git
+  location: https://github.com/doreshnikov/hw2-doreshnikov
 
 library
-  hs-source-dirs:      src
-  exposed-modules:     Lib
-  ghc-options:         -Wall
-  build-depends:       base >= 4.9 && < 5
-  default-language:    Haskell2010
+  exposed-modules:
+      Commands
+      FileSystem
+      FSError
+      Parser.Combinators
+      Parser.Parser
+  other-modules:
+      Paths_hw2_doreshnikov
+  hs-source-dirs:
+      src
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall -Werror
+  build-depends:
+      base >=4.7 && <5
+    , bytestring
+    , containers
+    , directory
+    , filepath
+    , mtl
+    , optparse-applicative
+    , text
+    , transformers
+    , utf8-string
+  default-language: Haskell2010
 
-executable hw2
-  hs-source-dirs:      app
-  main-is:             Main.hs
-  ghc-options:         -Wall -Werror -threaded -rtsopts -with-rtsopts=-N
-  build-depends:       base
-                     , hw2
-  default-language:    Haskell2010
+executable hw2-doreshnikov-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_hw2_doreshnikov
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall -Werror
+  build-depends:
+      base >=4.7 && <5
+    , bytestring
+    , containers
+    , directory
+    , filepath
+    , hw2-doreshnikov
+    , mtl
+    , optparse-applicative
+    , text
+    , transformers
+    , utf8-string
+  default-language: Haskell2010
+
+test-suite hw2-doreshnikov-test
+  type: exitcode-stdio-1.0
+  main-is: Main.hs
+  other-modules:
+      Spec, Paths_hw2_doreshnikov
+  hs-source-dirs:
+      test
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall -Werror
+  build-depends:
+      base >=4.7 && <5
+    , bytestring
+    , containers
+    , directory
+    , filepath
+    , hw2-doreshnikov
+    , mtl
+    , optparse-applicative
+    , text
+    , transformers
+    , utf8-string
+    , hspec
+    , hedgehog
+    , hspec-hedgehog
+    , tasty
+    , tasty-hspec
+    , tasty-hedgehog
+  default-language: Haskell2010

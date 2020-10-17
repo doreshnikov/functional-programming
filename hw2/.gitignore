@@ -1,0 +1,8 @@
+.stack-work/
+.idea/
+out/
+play_/
+play/
+
+*.iml
+*~
